@@ -25,7 +25,7 @@ const someFixtureData = [
   {
     id: 123,
     name: 'I am data object 123',
-  }
+  },
 ];
 
 

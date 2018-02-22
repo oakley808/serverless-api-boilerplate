@@ -12,5 +12,5 @@ export const getMyResource = async () => {
   const results = await db.query(sql);
 
   conn.close();
-  return result;
+  return results;
 };
