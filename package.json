@@ -1,0 +1,158 @@
+{
+  "name": "serverless-api-boilerplate",
+  "version": "1.0.0",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "cross-env": "^5.1.3",
+    "jsonwebtoken": "^8.1.1",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.186.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
+    "eslint-plugin-import": "^2.7.0",
+    "jest-cli": "^22.1.4",
+    "serverless-jest-plugin": "^0.1.6",
+    "serverless-offline": "^3.16.0",
+    "serverless-webpack": "^4.2.0",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "scripts": {
+    "deploy": "sls deploy",
+    "install:offline": "docker pull lambci/lambda",
+    "start": "SF_DB_HOST=localhost sls offline start -r us-west-2 --noTimeout",
+    "lint": "npm run lint:js",
+    "lint:js": "npm run lint:eslint -- . ",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern node_modules",
+    "test": "cross-env NODE_ENV=test jest --coverage --verbose",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ],
+      "stage-3"
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "transform-es2015-modules-commonjs",
+          "dynamic-import-node"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb-base",
+    "env": {
+      "node": true,
+      "jest": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "arrow-parens": [
+        0,
+        "as-needed"
+      ],
+      "arrow-body-style": [
+        0,
+        "as-needed"
+      ],
+      "comma-dangle": [
+        2,
+        "always-multiline"
+      ],
+      "import/extensions": 0,
+      "import/first": 0,
+      "import/newline-after-import": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-named-as-default": 0,
+      "import/no-dynamic-require": 0,
+      "import/no-unresolved": 2,
+      "import/no-webpack-loader-syntax": 0,
+      "import/prefer-default-export": 0,
+      "indent": [
+        2,
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "max-len": 0,
+      "newline-per-chained-call": 0,
+      "new-cap": 2,
+      "no-console": 1,
+      "no-param-reassign": [
+        0,
+        {
+          "props": false
+        }
+      ],
+      "no-plusplus": 1,
+      "no-unused-vars": 0,
+      "no-use-before-define": 0,
+      "prefer-template": 2,
+      "class-methods-use-this": 0,
+      "sort-imports": 0
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "webpack.config.js"
+        }
+      }
+    }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "app/**/*.js",
+      "!app/**/*.test.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 50,
+        "branches": 50,
+        "functions": 50,
+        "lines": 50
+      }
+    },
+    "moduleDirectories": [
+      "app",
+      "node_modules"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "tests/.*\\.test\\.js$"
+  },
+  "description": "A starter template for writing lambda functions in serverless.js",
+  "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "serverless-api-boilerplate"
+  },
+  "author": "Michael Oakley",
+  "license": "MIT"
+}
